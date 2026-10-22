@@ -13,6 +13,6 @@ A 26-week plan to become an Applied AI Engineer.
 - [x] Mon: Environment setup
 - [x] Tue: Kaggle Python, part 1
 - [x] Wed: Kaggle Python, part 2
-- [ ] Thu: Generators and decorators
+- [X] Thu: Generators and decorators
 - [ ] Fri: Context managers and Git
 - [ ] Sat: Community and mini-project
