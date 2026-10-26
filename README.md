@@ -33,6 +33,8 @@ Built to practice four core Python concepts:
 ### Files
 - `word_freq.py`: the compact version
 - `word_freq_commented.py`: the same program with beginner-friendly comments
+- `word_freq_json.py`: same program plus a `--json` flag
+- `test_word_freq.py`, `test_word_freq_json.py`: pytest tests (run with `python -m pytest -v`)
 
 Quick start: `python word_freq.py --demo`
 
