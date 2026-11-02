@@ -324,7 +324,8 @@ if __name__ == "__main__":
             print("  ValueError ->", e)
 
     # frozen=True: trying to change a Book after creation is blocked
-    try:
-        lib["111"].title = "Changed"      # pyright: ignore[reportAttributeAccessIssue]
-    except Exception as e:
-        print("  Frozen ->", type(e).__name__)
+          # Demonstrate frozen dataclass protection
+try:
+    setattr(lib["111"], "title", "Changed")
+except FrozenInstanceError:
+    print("  Frozen -> FrozenInstanceError")

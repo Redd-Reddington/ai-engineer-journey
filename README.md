@@ -19,6 +19,7 @@ A 26-week plan to become an Applied AI Engineer.
 
 ### Week 2: Object-Oriented Python
 - [x] Mon: Classes, dataclasses, inheritance vs composition, dunder methods, library system practice
+- [x] Tue: Type hints and mypy basics, Exceptions, custom exception classes, the logging module. Type hints to Monday's code and run mypy
 
 
 ## Mini-project: Word-Frequency Analyzer
