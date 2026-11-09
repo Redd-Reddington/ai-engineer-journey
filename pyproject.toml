@@ -1,0 +1,13 @@
+[tool.pytest.ini_options]
+pythonpath = [".", "objectOrientedPython"]
+testpaths = ["tests"]
+
+[tool.mypy]
+mypy_path = "objectOrientedPython"
+
+[tool.coverage.report]
+exclude_also = [
+    "if __name__ == .__main__.:"
+]
+show_missing = true
+fail_under = 80

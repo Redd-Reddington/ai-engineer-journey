@@ -17,10 +17,11 @@ A 26-week plan to become an Applied AI Engineer.
 - [x] Fri: Context managers and Git
 - [x] Sat: Community and mini-project
 
-### Week 2: Object-Oriented Python
+### Week 2: Professional Python
 - [x] Mon: Classes, dataclasses, inheritance vs composition, dunder methods, library system practice
 - [x] Tue: Type hints and mypy basics, Exceptions, custom exception classes, the logging module. Type hints to Monday's code and run mypy
 - [x] Wed: venv, pip, requirements.txt, pyproject.toml, src layout, __init__.py, pytest, argparse, Typer, Basic CLI applications.
+- [x] Thursday: pytest, fixtures, parametrization, 94% coverage.
 
 
 ## Mini-project: Word-Frequency Analyzer
@@ -100,3 +101,33 @@ Running the file prints a demo: stocking the shelves, searching, checkouts, ever
 - Data lives in memory only, so it resets every run
 - No due dates or late fees
 - Search is a simple case-insensitive keyword match on title and author
+
+
+## Testing
+
+Tests live in `tests/` and use [pytest](https://docs.pytest.org/) with `pytest-cov`.
+
+```bash
+pip install pytest pytest-cov
+python -m pytest                      # run all tests
+python -m pytest -v                   # verbose: one line per test
+python -m pytest -k "borrow_limit"    # run tests matching a name
+python -m pytest --cov=library_system --cov=word_freq --cov=word_freq_json --cov-report=term-missing
+```
+
+| Test file | Covers |
+|---|---|
+| `tests/test_library.py` | Library system: checkout/return rules, custom exceptions, dunder methods, dataclass validation |
+| `tests/test_word_freq.py` | Word-frequency tool: generator, context manager, decorator, counting |
+| `tests/test_word_freq_json.py` | `--json` edition: JSON output, stdout vs stderr, CLI behaviour |
+| `tests/test_word_freq_files.py` | `count_words` on real temp files, parametrized options |
+
+**Result:** 52 tests passing, 94% total coverage (library_system 100%).
+The coverage floor is set to 80% in `pyproject.toml`.
+
+### What I learned
+- **Fixtures** build reusable test objects (`conftest.py` shares them across files)
+- **`parametrize`** runs one test body against many inputs
+- **`pytest.raises`** checks that the right error is raised
+- **`tmp_path`, `monkeypatch`, `capsys`** for files, fake command lines and captured output
+- Coverage shows which lines ran, not whether the assertions are good

@@ -324,8 +324,7 @@ if __name__ == "__main__":
             print("  ValueError ->", e)
 
     # frozen=True: trying to change a Book after creation is blocked
-          # Demonstrate frozen dataclass protection
-try:
-    setattr(lib["111"], "title", "Changed")
-except FrozenInstanceError:
-    print("  Frozen -> FrozenInstanceError")
+    try:
+        setattr(lib["111"], "title", "Changed")
+    except FrozenInstanceError:
+        print("  Frozen -> FrozenInstanceError")
