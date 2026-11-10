@@ -21,7 +21,8 @@ A 26-week plan to become an Applied AI Engineer.
 - [x] Mon: Classes, dataclasses, inheritance vs composition, dunder methods, library system practice
 - [x] Tue: Type hints and mypy basics, Exceptions, custom exception classes, the logging module. Type hints to Monday's code and run mypy
 - [x] Wed: venv, pip, requirements.txt, pyproject.toml, src layout, __init__.py, pytest, argparse, Typer, Basic CLI applications.
-- [x] Thursday: pytest, fixtures, parametrization, 94% coverage.
+- [x] Thu: pytest, fixtures, parametrization, 94% coverage.
+- [x] Fri: NumPy arrays, indexing, broadcasting, vectorization, and timing loops against vectorized code
 
 
 ## Mini-project: Word-Frequency Analyzer
@@ -101,6 +102,45 @@ Running the file prints a demo: stocking the shelves, searching, checkouts, ever
 - Data lives in memory only, so it resets every run
 - No due dates or late fees
 - Search is a simple case-insensitive keyword match on title and author
+
+
+
+## Mini-project: NumPy Practice
+
+Practice scripts for NumPy fundamentals, plus a benchmark showing why vectorized code is faster.
+Built to practice four core NumPy concepts:
+
+| Concept | Where it's used |
+|---|---|
+| Arrays and shapes | 1D and 3D arrays, `.ndim`, `.shape` |
+| Indexing and slicing | `array[start:end:step]` on rows and columns, negative indexes, reversing |
+| Broadcasting | `(1, 4) + (4, 1)` expands to a full grid; dimensions must match or be 1 |
+| Vectorization | `np.vectorize` compared with native array operations |
+
+### Files
+- `NumPy/numpy_practise.py`: notes and examples, with each topic in a commented-out block
+- `NumPy/vectorized_operations.py`: benchmark of loop vs `np.vectorize` vs native NumPy
+
+Quick start: `python NumPy/vectorized_operations.py`
+
+### Benchmark results
+1,000,000 random floats, computing `x ** 2` (one run, results vary by machine):
+
+| Method | Time |
+|---|---|
+| Python loop | 0.1140s |
+| `np.vectorize` | 0.1961s |
+| Native NumPy (`x ** 2`) | 0.0023s (~49x faster than the loop) |
+
+### What I learned
+- `np.vectorize` is a convenience wrapper, not real vectorization. It still calls the Python function once per element, so it was slower than the plain loop.
+- Native array operations run in compiled C over contiguous typed memory.
+- Use `np.vectorize` only when the logic can't be written with array operations or `np.where`.
+
+### Known limitations
+- Timings come from a single run, so they vary between runs
+- Only one array size (1,000,000) is benchmarked
+
 
 
 ## Testing

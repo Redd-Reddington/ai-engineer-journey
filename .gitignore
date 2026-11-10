@@ -7,5 +7,4 @@ __pycache__/
 .pytest_cache/
 .coverage
 htmlcov/
-.pytest_cache/
 .mypy_cache/
