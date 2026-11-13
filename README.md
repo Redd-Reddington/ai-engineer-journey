@@ -23,6 +23,7 @@ A 26-week plan to become an Applied AI Engineer.
 - [x] Wed: venv, pip, requirements.txt, pyproject.toml, src layout, __init__.py, pytest, argparse, Typer, Basic CLI applications.
 - [x] Thu: pytest, fixtures, parametrization, 94% coverage.
 - [x] Fri: NumPy arrays, indexing, broadcasting, vectorization, and timing loops against vectorized code
+- [x] Sat: Finish the mini-project. Library System turned into a tested CLI tool (`library_app`) with JSON persistence, a README and a GitHub Actions workflow, 20 NumPy exercises, weekly review.
 
 
 ## Mini-project: Word-Frequency Analyzer
@@ -99,10 +100,67 @@ python objectOrientedPython/library_system.py
 Running the file prints a demo: stocking the shelves, searching, checkouts, every error case, and validation checks.
 
 ### Known limitations
-- Data lives in memory only, so it resets every run
+- Data lives in memory only, so it resets every run (fixed in the CLI version below)
 - No due dates or late fees
 - Search is a simple case-insensitive keyword match on title and author
 
+
+## Mini-project: Library App (CLI)
+
+The Library System turned into an installable command-line tool with JSON persistence and a test suite. It lives in its own folder, `library_app/`, with its own `pyproject.toml`, README and tests.
+Built to practice packaging, persistence, CLI design and testing:
+
+| Concept | Where it's used |
+|---|---|
+| Package structure | `models.py`, `library.py`, `storage.py`, `cli.py` split by responsibility |
+| Persistence | `save` / `load` write the library to JSON; books carry a `"type"` field so eBooks reload as `EBook` |
+| Single source of truth | Members store only borrowed ISBNs; loans are rebuilt on load through `Library.checkout` |
+| CLI | Typer commands that load, act, save, and turn `LibraryError` into a clean `Error: ...` message with exit code 1 |
+| Testing | pytest fixtures, `parametrize`, `tmp_path` and Typer's `CliRunner` |
+| CI | GitHub Actions workflow runs the tests on every push |
+
+### Files
+- `library_app/library_app/`: the package (`models.py`, `library.py`, `storage.py`, `cli.py`)
+- `library_app/tests/`: `conftest.py`, `test_library.py`, `test_storage.py`, `test_cli.py`
+- `library_app/pyproject.toml`: dependencies, `library` entry point, pytest config
+- `.github/workflows/tests.yml`: CI workflow (runs from the `library_app` folder)
+
+Quick start:
+```bash
+cd library_app
+python -m venv .venv
+.venv\Scripts\activate        # macOS/Linux: source .venv/bin/activate
+pip install -e ".[dev]"
+library --help
+```
+
+### Commands
+| Command | Arguments | What it does |
+|---|---|---|
+| `add-book` | `ISBN TITLE AUTHOR YEAR` | Add a book |
+| `add-ebook` | `ISBN TITLE AUTHOR YEAR SIZE_MB` | Add an eBook |
+| `register` | `MEMBER_ID NAME EMAIL` | Register a member |
+| `checkout` | `MEMBER_ID ISBN` | Lend a book to a member |
+| `return` | `MEMBER_ID ISBN` | Return a book |
+| `search` | `KEYWORD` | Search titles and authors |
+| `available` | | List books not on loan |
+
+Every command accepts `--db PATH` (default `library.json` in the current folder).
+
+### What I learned
+- A CLI runs once per command, so state has to be saved to disk or it is forgotten
+- Storing one source of truth (ISBNs on members) and rebuilding the rest avoids two structures drifting apart
+- Click treats `-1` as an option flag, so the test for a bad file size uses `0` instead
+- `pip install -e .` from the repo root fails when the root has several top-level folders; install from inside the project folder
+- GitHub only reads workflows from the repo root's `.github/`, so a subfolder project needs `working-directory`
+
+### Known limitations
+- `Member.borrowed` is a public list, so outside code can bypass the loan rules
+- No due dates, fines or loan history
+- The whole file is loaded and saved on every command
+- No file locking, so two commands at the same moment can overwrite each other
+- Emails are stored in plain text and not validated; `Book` doesn't validate the author
+- ISBNs are treated as opaque strings (no checksum validation)
 
 
 ## Mini-project: NumPy Practice
@@ -142,10 +200,9 @@ Quick start: `python NumPy/vectorized_operations.py`
 - Only one array size (1,000,000) is benchmarked
 
 
-
 ## Testing
 
-Tests live in `tests/` and use [pytest](https://docs.pytest.org/) with `pytest-cov`.
+Tests use [pytest](https://docs.pytest.org/) with `pytest-cov`. The root `tests/` folder covers the earlier mini-projects; `library_app/tests/` covers the CLI tool.
 
 ```bash
 pip install pytest pytest-cov
@@ -165,9 +222,25 @@ python -m pytest --cov=library_system --cov=word_freq --cov=word_freq_json --cov
 **Result:** 52 tests passing, 94% total coverage (library_system 100%).
 The coverage floor is set to 80% in `pyproject.toml`.
 
+### Library App tests
+Run from inside `library_app/`:
+
+```bash
+python -m pytest --cov=library_app
+```
+
+| Test file | Covers |
+|---|---|
+| `library_app/tests/test_library.py` | Model validation, duplicates, checkout/return rules, failed checkout changing nothing, search, dunder methods |
+| `library_app/tests/test_storage.py` | JSON round trip (EBook type, loans, join date), missing file, saved format |
+| `library_app/tests/test_cli.py` | Every command via `CliRunner`: exit codes, messages, state persisting between runs |
+
+**Result:** 36 tests passing, 99% total coverage (library, models and storage 100%, cli 96%).
+
 ### What I learned
 - **Fixtures** build reusable test objects (`conftest.py` shares them across files)
 - **`parametrize`** runs one test body against many inputs
 - **`pytest.raises`** checks that the right error is raised
 - **`tmp_path`, `monkeypatch`, `capsys`** for files, fake command lines and captured output
+- **`CliRunner`** invokes a Typer app in-process and returns the exit code and output
 - Coverage shows which lines ran, not whether the assertions are good
