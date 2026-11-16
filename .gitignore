@@ -10,4 +10,4 @@ htmlcov/
 .mypy_cache/
 movies_2015_plus.csv
 *.egg-info/
-.coverage
+.coverage.*
