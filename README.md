@@ -26,6 +26,10 @@ A 26-week plan to become an Applied AI Engineer.
 - [x] Sat: Finish the mini-project. Library System turned into a tested CLI tool (`library_app`) with JSON persistence, a README and a GitHub Actions workflow, 20 NumPy exercises, weekly review.
 
 
+### Week 3: Data Libraries and First Math
+- [x] Mon: pandas part 1 (Kaggle creating/reading data, indexing and selecting), practice on the Netflix Movies and TV Shows CSV: inspecting, selecting with `loc`/`iloc`, boolean filtering, exporting a subset
+
+
 ## Mini-project: Word-Frequency Analyzer
 
 A command-line tool that reads a text file and prints its most common words.
