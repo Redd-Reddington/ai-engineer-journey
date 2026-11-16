@@ -11,3 +11,6 @@ exclude_also = [
 ]
 show_missing = true
 fail_under = 80
+
+[tool.setuptools.packages.find]
+include = ["library_app*"]
