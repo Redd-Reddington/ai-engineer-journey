@@ -29,6 +29,7 @@ A 26-week plan to become an Applied AI Engineer.
 ### Week 3: Data Libraries and First Math
 - [x] Mon: pandas part 1 (Kaggle creating/reading data, indexing and selecting), practice on the Netflix Movies and TV Shows CSV: inspecting, selecting with `loc`/`iloc`, boolean filtering, exporting a subset
 - [x] Tue: pandas part 2 (Kaggle summary functions, maps, grouping, sorting), practiced on the Netflix CSV with `value_counts`, `map`, `groupby().agg()` and `sort_values`
+- [x] Wed: pandas part 3 (data types, missing values, renaming, combining), Matplotlib basics, 3Blue1Brown linear algebra episodes 1-3
 
 ## Mini-project: Word-Frequency Analyzer
 
