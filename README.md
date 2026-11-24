@@ -32,6 +32,7 @@ A 26-week plan to become an Applied AI Engineer.
 - [x] Wed: pandas part 3 (data types, missing values, renaming, combining), Matplotlib basics, 3Blue1Brown linear algebra episodes 1-3
 - [x] Thu: Matplotlib and Seaborn: line, bar, histogram, scatter and box plots, 3Blue1Brown linear algebra episodes 4-6.
 - [x] Fri: dataset chosen (Netflix Movies and TV Shows), five questions written and answered, first look at shape, dtypes, missing values and describe()
+- [x] Sat: cleaning pass (duplicates, missing values, types, outliers), first EDA with 7 visualizations, dot product and matrix multiplication by hand in NumPy, weekly review
 
 ## Mini-project: Word-Frequency Analyzer
 
