@@ -17,6 +17,7 @@ A 26-week plan to become an Applied AI Engineer.
 - [x] Fri: Context managers and Git
 - [x] Sat: Community and mini-project
 
+
 ### Week 2: Professional Python
 - [x] Mon: Classes, dataclasses, inheritance vs composition, dunder methods, library system practice
 - [x] Tue: Type hints and mypy basics, Exceptions, custom exception classes, the logging module. Type hints to Monday's code and run mypy
@@ -33,6 +34,12 @@ A 26-week plan to become an Applied AI Engineer.
 - [x] Thu: Matplotlib and Seaborn: line, bar, histogram, scatter and box plots, 3Blue1Brown linear algebra episodes 4-6.
 - [x] Fri: dataset chosen (Netflix Movies and TV Shows), five questions written and answered, first look at shape, dtypes, missing values and describe()
 - [x] Sat: cleaning pass (duplicates, missing values, types, outliers), first EDA with 7 visualizations, dot product and matrix multiplication by hand in NumPy, weekly review
+
+
+### Week 4: Data Project, SQL and Async
+- [x] Mon: PostgreSQL setup (install, SQL Server to Postgres mapping), Netflix dataset cleaned and loaded into a netflix schema
+
+
 
 ## Mini-project: Word-Frequency Analyzer
 
