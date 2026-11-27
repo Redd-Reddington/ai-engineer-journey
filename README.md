@@ -38,6 +38,7 @@ A 26-week plan to become an Applied AI Engineer.
 
 ### Week 4: Data Project, SQL and Async
 - [x] Mon: PostgreSQL setup (install, SQL Server to Postgres mapping), Netflix dataset cleaned and loaded into a netflix schema
+- [x] Tue: SQL for analysis (joins, window functions, CTEs), answered 10 questions about the Netflix dataset in `postgresql/analysis.sql`
 
 
 
